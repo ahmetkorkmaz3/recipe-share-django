@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', recipe_views.index, name='index'),
+    path('share/', recipe_views.share, name='share'),
     path('admin/', admin.site.urls),
 ]
 

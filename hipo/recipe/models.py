@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from multiselectfield import MultiSelectField
 
 RECIPE_STAGE_CHOICES = (
     ('easy', 'Easy'),
@@ -21,6 +22,15 @@ RECIPE_VOTE_CHOICES = (
     ('10', '10')
 )
 
+RECIPE_INGREDIENTS_CHOICE = (
+    ('tomato', 'Tomato'),
+    ('milk', 'Milk'),
+    ('oil', 'Oil'),
+    ('egg', 'Egg'),
+    ('cheese', 'Cheese'),
+    ('chicken', 'Chicken'),
+)
+
 class Recipe(models.Model):
     """
     """
@@ -35,6 +45,7 @@ class Recipe(models.Model):
     )
     recipe_image = models.ImageField(blank=True, null=True)
     recipe_name = models.CharField(max_length=30)
+    recipe_ingredients = MultiSelectField(choices=RECIPE_INGREDIENTS_CHOICE, blank=True)
     recipe_content = models.CharField(max_length=255)
     recipe_vote = models.CharField(
         max_length=30,
