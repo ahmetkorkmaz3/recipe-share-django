@@ -4,27 +4,33 @@
 
 {% block content %}
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
-    </ul>
+<div class="content">
+  <div class="row">
+    <div class="col-md-8">
+      {% for recipe in recipes %}
+        <div class="card recipe">
+          <h2>{{ recipe.recipe_name }}</h2>
+          <img src="media/{{ recipe.recipe_image }}">
+          <p>{{ recipe.recipe_content }}<p>
+            <span>{{ recipe.created_date }} - </span>
+            <span>{{ recipe.recipe_vote }}({{ recipe.recipe_vote_count }} Votes) - </span>
+            <span>{{ recipe.recipe_like }} Likes - </span>
+            <span>{{ recipe.recipe_user }}</span>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <form action="" method="POST">
+          <input type="text" name="search" placeholder="search something">
+        </form>
+      </div>
+      <div class="card">
+        Malzemeler
+      </div>
+    </div>
   </div>
-</nav>
+
+</div>
 
 {% endblock %}

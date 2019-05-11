@@ -10,11 +10,25 @@
 </head>
 <body>
 
-  <div class="container">
-    <div class="content">
-      {% block content %}
-      {% endblock %}
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Recipe.com <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Share a Recipe</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">User Name (log out)</a>
+        </li>
+      </ul>
     </div>
+  </nav>
+
+  <div class="container">
+    {% block content %}
+    {% endblock %}
   </div>
 
 </body>

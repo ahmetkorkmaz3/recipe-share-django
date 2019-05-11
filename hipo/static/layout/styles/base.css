@@ -1,0 +1,13 @@
+.content {
+  margin-top: 10px;
+}
+
+.recipe img {
+  width: 250px;
+  height: auto;
+}
+
+.recipe {
+  margin-bottom: 10px;
+    padding: 20px;
+}
