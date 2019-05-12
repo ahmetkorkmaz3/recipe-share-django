@@ -50,7 +50,7 @@ class Recipe(models.Model):
     )
     recipe_name = models.CharField(max_length=30)
     recipe_ingredients = MultiSelectField(choices=RECIPE_INGREDIENTS_CHOICE, blank=True)
-    recipe_content = models.CharField(max_length=255)
+    recipe_content = models.CharField(max_length=2000)
     recipe_vote = models.CharField(
         max_length=30,
         choices=RECIPE_VOTE_CHOICES,

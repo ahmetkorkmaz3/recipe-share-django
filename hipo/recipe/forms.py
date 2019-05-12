@@ -13,3 +13,6 @@ class RecipeSubmissionForm(forms.ModelForm):
             'recipe_stage',
             'recipe_ingredients'
         ]
+        widgets = {
+            'recipe_content': forms.Textarea(attrs={'cols':80, 'rows': 20})
+        }
