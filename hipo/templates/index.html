@@ -20,12 +20,15 @@
       {% endfor %}
     </div>
     <div class="col-md-4">
-      <div class="card">
-        <form action="" method="POST">
-          <input type="text" name="search" placeholder="search something">
+      <div class="card pt-3 px-4 mb-4">
+        <form method="POST">
+          <div class="row">
+            <input class="form-control col-md-8" type="text" name="search" placeholder="search something">
+            <button class="btn btn-outline-success my-2 my-sm-0 col-md-4" type="submit">Search</button>
+          </div>
         </form>
       </div>
-      <div class="card">
+      <div class="card p-4">
         Malzemeler
       </div>
     </div>
