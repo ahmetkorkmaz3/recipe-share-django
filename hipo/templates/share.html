@@ -8,12 +8,16 @@
 <div class="content">
   <div class="card">
     <div class="card-body">
+      {% if user.is_authenticated %}
       <h2 class="card-title">Share a Recipe</h2>
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Share">
       </form>
+      {% else %}
+      <h2 class="card-title">Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">signup</a></h2>
+      {% endif %}
     </div>
   </div>
 </div>

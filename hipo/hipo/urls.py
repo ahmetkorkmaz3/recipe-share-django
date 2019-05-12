@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
+    path('detail/<slug:recipe_name>', recipe_views.recipe_detail, name='detail'),
 ]
 
 if settings.DEBUG:

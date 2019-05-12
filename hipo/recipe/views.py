@@ -28,3 +28,7 @@ def share(request):
             return redirect('index')
     else:
         return render(request, 'share.html', {'form': form})
+
+def recipe_detail(request, recipe_name):
+    recipe = Recipe.objects.get(recipe_name=recipe_name)
+    return render(request, 'detail.html', {'recipe': recipe})
