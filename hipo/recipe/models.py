@@ -43,7 +43,11 @@ class Recipe(models.Model):
         max_length=30,
         choices=RECIPE_STAGE_CHOICES,
     )
-    recipe_image = models.ImageField(blank=True, null=True)
+    recipe_image = models.ImageField(
+        blank=True,
+        null=True,
+        upload_to='media/',
+    )
     recipe_name = models.CharField(max_length=30)
     recipe_ingredients = MultiSelectField(choices=RECIPE_INGREDIENTS_CHOICE, blank=True)
     recipe_content = models.CharField(max_length=255)

@@ -13,11 +13,9 @@ def index(request):
 def share(request):
     form = RecipeSubmissionForm()
     if request.method == 'POST':
-        form = RecipeSubmissionForm(request.POST)
-        if form.is_valid(): # form is valid olmuyor
-            return redirect(reverse('index.html', args='1'))
-        else:
-            print("else")
-            return False
+        form = RecipeSubmissionForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Veritabanına ekleme işlemi yapılacak
+            return render(request, 'index.html')
     else:
         return render(request, 'share.html', {'form': form})
