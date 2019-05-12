@@ -16,7 +16,12 @@
       <span>{{ recipe.created_date }}</span>
       <br/>
       <img class="d-block my-2" src="/media/{{ recipe.recipe_image }}" alt="Image">
-      <button class="btn btn-success" type="submit" name="Like">Like ({{ recipe.recipe_like }})</button>
+      {% if user.is_authenticated %}
+      <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-success" type="submit" name="Like">Like ({{ recipe.recipe_like }})</button>
+      </form>
+      {% endif %}
       <h2 class="card-title mt-4">Ingredients</h2>
       <ul class="my-4">
         {% for ingredient in recipe.recipe_ingredients %}
@@ -25,24 +30,13 @@
       </ul>
       <h2 class="card-title">Description</h2>
       <p>{{ recipe.recipe_content }}</p>
-
+      {% if user.is_authenticated %}
       <form method="POST">
-        <select class="form-control col-md-1 d-inline" name="vote">
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
+        {% csrf_token %}
+        {{ form }}
         <button class="btn btn-primary" type="submit" name="vote">Rate</button>
       </form>
-
+      {% endif %}
     </div>
   </div>
 </div>

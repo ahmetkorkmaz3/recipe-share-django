@@ -9,7 +9,7 @@
     <div class="col-md-8">
       {% for recipe in recipes %}
         <div class="card recipe">
-          <h2>{{ recipe.recipe_name }}</h2>
+          <a href="{% url 'detail' recipe.recipe_name %}"><h2>{{ recipe.recipe_name }}</h2></a>
           <img src="media/{{ recipe.recipe_image }}">
           <p>{{ recipe.recipe_content }}<p>
             <span>{{ recipe.created_date }} - </span>
