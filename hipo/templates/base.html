@@ -21,7 +21,7 @@
         </li>
         {% if user.is_authenticated %}
         <li class="nav-item my-2">
-          <a class="nav-link d-inline" href="#">User Name</a>
+          <a class="nav-link d-inline" href="{% url 'profile' %}">{{ user.username }}</a>
           <a class="nav-link d-inline" href="{% url 'logout' %}">(log out)</a>
         </li>
         {% else %}
