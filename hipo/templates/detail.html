@@ -34,7 +34,7 @@
       <form method="POST">
         {% csrf_token %}
         {{ form }}
-        <button class="btn btn-primary" type="submit" name="vote">Rate</button>
+        <input class="btn btn-primary" type="submit" name="vote" value="Rate">
       </form>
       {% endif %}
     </div>

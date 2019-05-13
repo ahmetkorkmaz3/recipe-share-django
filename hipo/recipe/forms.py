@@ -29,8 +29,11 @@ class RecipeSubmissionForm(forms.ModelForm):
         widgets = {
             'recipe_content': forms.Textarea(attrs={'cols':80, 'rows': 20})
         }
-
+"""
 class VoteSubmissionForm(forms.ModelForm):
     class Meta:
         model = Recipe
         field = ['recipe_vote_count']
+"""
+class VoteSubmissionForm(forms.Form):
+    vote = forms.ChoiceField(choices=VOTE_CHOICES, widget=forms.Select, label='Vote')

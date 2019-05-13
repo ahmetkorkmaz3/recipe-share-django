@@ -5,7 +5,12 @@ from django.urls import reverse
 
 
 def index(request):
-    recipes = Recipe.objects.all()
+    recipes = Recipe.objects.all().order_by('-created_date')
+    query = request.GET.get('search')
+    if query:
+        recipes = Recipe.objects.all().filter(recipe_name__icontains=query)
+        if not recipes:
+            recipes = Recipe.objects.all().filter(recipe_ingredients__contains=query)
     return render(request, 'index.html', {
         'title': 'Home',
         'recipes': recipes,
@@ -44,20 +49,18 @@ def recipe_detail(request, recipe_name):
                 'form': form,
             })
         elif 'vote' in request.POST:
-            form = VoteSubmissionForm(request.POST) #forma veri gelmiyor
-            if form.is_valid():
-                recipe_vote = recipe.recipe_vote
-                recipe_vote_count = recipe.recipe_vote_count
-                recipe_vote = (int(recipe_vote) * int(recipe_vote_count) + form.cleaned_data['vote']) / (int(recipe_vote_count) + 1)
-                recipe_vote_count = int(recipe_vote_count) + 1
-                recipe = Recipe.objects.filter(recipe_name=recipe_name).update(recipe_vote=recipe_vote, recipe_vote_count=recipe_vote_count)
-                recipe = Recipe.objects.get(recipe_name=recipe_name)
-                return render(request, 'detail.html', {
-                    'recipe': recipe,
-                    'form': form,
-                })
-            else:
-                return redirect('index')
+            form = VoteSubmissionForm(request.POST) #forma veri gelmiyor ?
+            recipe_vote = recipe.recipe_vote
+            recipe_vote_count = recipe.recipe_vote_count
+            recipe_vote = (int(recipe_vote) * int(recipe_vote_count) + form.cleaned_data['vote']) / (int(recipe_vote_count) + 1)
+            recipe_vote_count = int(recipe_vote_count) + 1
+            recipe = Recipe.objects.filter(recipe_name=recipe_name).update(recipe_vote=recipe_vote, recipe_vote_count=recipe_vote_count)
+            recipe = Recipe.objects.get(recipe_name=recipe_name)
+            return render(request, 'detail.html', {
+                'recipe': recipe,
+                'form': form,
+            })
+
     return render(request, 'detail.html', {
         'recipe': recipe,
         'form': form,
