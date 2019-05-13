@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from recipe.models import *
 from .forms import RecipeSubmissionForm, VoteSubmissionForm
 from django.urls import reverse
+import math
 
 
 def index(request):
@@ -48,18 +49,23 @@ def recipe_detail(request, recipe_name):
                 'recipe': recipe,
                 'form': form,
             })
-        elif 'vote' in request.POST:
-            form = VoteSubmissionForm(request.POST) #forma veri gelmiyor ?
-            recipe_vote = recipe.recipe_vote
-            recipe_vote_count = recipe.recipe_vote_count
-            recipe_vote = (int(recipe_vote) * int(recipe_vote_count) + form.cleaned_data['vote']) / (int(recipe_vote_count) + 1)
-            recipe_vote_count = int(recipe_vote_count) + 1
-            recipe = Recipe.objects.filter(recipe_name=recipe_name).update(recipe_vote=recipe_vote, recipe_vote_count=recipe_vote_count)
-            recipe = Recipe.objects.get(recipe_name=recipe_name)
-            return render(request, 'detail.html', {
-                'recipe': recipe,
-                'form': form,
-            })
+        elif 'rate' in request.POST:
+            form = VoteSubmissionForm(request.POST)
+            if form.is_valid():
+                vote_value = form.cleaned_data['vote']
+                vote_value = int(vote_value)
+                recipe_vote = recipe.recipe_vote
+                recipe_vote_count = recipe.recipe_vote_count
+                recipe_vote = (float(recipe_vote) * float(recipe_vote_count) + vote_value) / (float(recipe_vote_count) + 1)
+                recipe_vote_count = float(recipe_vote_count) + 1
+                recipe = Recipe.objects.filter(recipe_name=recipe_name).update(recipe_vote=recipe_vote, recipe_vote_count=recipe_vote_count)
+                recipe = Recipe.objects.get(recipe_name=recipe_name)
+                return render(request, 'detail.html', {
+                    'recipe': recipe,
+                    'form': form,
+                })
+            else:
+                return redirect('index')
 
     return render(request, 'detail.html', {
         'recipe': recipe,

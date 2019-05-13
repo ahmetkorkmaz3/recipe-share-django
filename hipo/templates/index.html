@@ -13,9 +13,9 @@
           <img src="media/{{ recipe.recipe_image }}">
           <p>{{ recipe.recipe_content }}<p>
             <span>{{ recipe.created_date }} - </span>
-            <span>{{ recipe.recipe_vote }}({{ recipe.recipe_vote_count }} Votes) - </span>
+            <span>{{ recipe.recipe_vote }}/10 - ({{ recipe.recipe_vote_count }} Votes) - </span>
             <span>{{ recipe.recipe_like }} Likes - </span>
-            <span>{{ recipe.recipe_user }}</span>
+            <span>by {{ recipe.recipe_user }}</span>
         </div>
       {% endfor %}
     </div>

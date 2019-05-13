@@ -3,6 +3,7 @@ from django.conf import settings
 from django.utils import timezone
 from multiselectfield import MultiSelectField
 
+
 RECIPE_STAGE_CHOICES = (
     ('easy', 'Easy'),
     ('medium', 'Medium'),
