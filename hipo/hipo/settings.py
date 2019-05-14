@@ -25,7 +25,7 @@ SECRET_KEY = '3)1x0z^5c8w9e@oecv+c2i!bvf&79l!1d354@ox02sf0w=tt2-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -81,8 +81,12 @@ WSGI_APPLICATION = 'hipo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'recipe',
+        'USER': 'ahmetkorkmaz3',
+        'PASSWORD': '345335',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 

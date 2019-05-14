@@ -16,14 +16,15 @@ def index(request):
             recipes = Recipe.objects.all().filter(recipe_ingredients__contains=query)
     #top ingredients
     ingredients = Recipe.objects.all().values('recipe_ingredients').annotate(total=Count('recipe_ingredients')).order_by('recipe_ingredients')
-    max = ingredients[0].get('total')
-    top_ingredients = ingredients[0]
-    for count in ingredients:
-        if max < count.get('total'):
-            max = count.get('total')
-            top_ingredients = count
+    if ingredients:
+        max = ingredients[0].get('total')
+        top_ingredients = ingredients[0]
+        for count in ingredients:
+            if max < count.get('total'):
+                max = count.get('total')
+                top_ingredients = count
 
-    top_ingredients = top_ingredients['recipe_ingredients']
+        top_ingredients = top_ingredients['recipe_ingredients']
     return render(request, 'index.html', {
         'title': 'Home',
         'recipes': recipes,
