@@ -2,19 +2,33 @@ from django.shortcuts import render, redirect
 from recipe.models import *
 from .forms import RecipeSubmissionForm, VoteSubmissionForm
 from django.urls import reverse
+from django.db.models import Count
 import math
 
 
 def index(request):
     recipes = Recipe.objects.all().order_by('-created_date')
+    #Search
     query = request.GET.get('search')
     if query:
         recipes = Recipe.objects.all().filter(recipe_name__icontains=query)
         if not recipes:
             recipes = Recipe.objects.all().filter(recipe_ingredients__contains=query)
+    #top ingredients
+    ingredients = Recipe.objects.all().values('recipe_ingredients').annotate(total=Count('recipe_ingredients')).order_by('recipe_ingredients')
+    max = ingredients[0].get('total')
+    top_ingredients = ingredients[0]
+    for count in ingredients:
+        if max < count.get('total'):
+            max = count.get('total')
+            top_ingredients = count
+
+    top_ingredients = top_ingredients['recipe_ingredients']
     return render(request, 'index.html', {
         'title': 'Home',
         'recipes': recipes,
+        'top_ingredients': top_ingredients,
+        'top_ingredients_count': max,
     })
 
 def share(request):
