@@ -83,7 +83,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'recipe',
-        'USER': 'ahmetkorkmaz3',
+        'USER': 'ahmetk',
         'PASSWORD': '345335',
         'HOST': 'localhost',
         'PORT': '',
@@ -129,9 +129,7 @@ USE_TZ = True
 
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS= [
-    STATIC_DIR,
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 LOGOUT_REDIRECT_URL = '/'
 
 MEDIA_URL = '/media/'
