@@ -25,6 +25,9 @@ def index(request):
                 top_ingredients = count
 
         top_ingredients = top_ingredients['recipe_ingredients']
+    else:
+        top_ingredients = 0
+        max = 0
     return render(request, 'index.html', {
         'title': 'Home',
         'recipes': recipes,
