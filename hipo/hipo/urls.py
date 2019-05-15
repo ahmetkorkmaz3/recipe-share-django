@@ -18,13 +18,18 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from recipe import views as recipe_views
+from accounts import views as accounts_views
+
+
 
 urlpatterns = [
     path('', recipe_views.index, name='index'),
     path('share/', recipe_views.share, name='share'),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/', include('accounts.urls')),
+    path('accounts/signup/', accounts_views.signup, name='signup'),
+    path('accounts/profile/', accounts_views.dashboard, name='dashboard'),
+    path('accounts/profile/<slug:username>/', accounts_views.profile, name='profile'),
     path('detail/<slug:recipe_name>', recipe_views.recipe_detail, name='detail'),
 ]
 

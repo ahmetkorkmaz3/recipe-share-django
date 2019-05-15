@@ -1,30 +1,24 @@
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate
 
 
 def signup(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
-            password = form.cleaned_data['password']
-            password_again = form.cleaned_data['password_again']
-            if password == password_again:
-                signup = User.objects.create(
-                    username=form.cleaned_data['username'],
-                    password=form.cleaned_data['password'],
-                    email=form.cleaned_data['email'],
-                    first_name=form.cleaned_data['first_name'],
-                    last_name=form.cleaned_data['last_name'],
-                )
-                signup.save()
-                return redirect('login')
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('index')
     else:
-        form = CustomUserCreationForm()
-        return render(request, 'signup.html', {
-            'form': form,
-            'title': 'Sign Up'
-        })
+        form = UserCreationForm()
+    return render(request, 'registration/signup.html', {
+        'form': form,
+    })
 
 def profile(request, username):
     user = User.objects.get(username=username)

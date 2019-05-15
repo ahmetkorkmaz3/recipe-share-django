@@ -15,7 +15,7 @@
             <span>{{ recipe.created_date }} - </span>
             <span>{{ recipe.recipe_vote }}/10 - ({{ recipe.recipe_vote_count }} Votes) - </span>
             <span>{{ recipe.recipe_like }} Likes - </span>
-            <span>by {{ recipe.recipe_user }}</span>
+            <span>by <a href="{% url 'profile' recipe.recipe_user %}">{{ recipe.recipe_user }}</a></span>
         </div>
       {% endfor %}
     </div>
