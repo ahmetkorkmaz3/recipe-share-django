@@ -1,5 +1,5 @@
 # Yemek Tarifi Paylaşımı Web Sitesi
-[Web Sitesi](http://46.101.116.137/) adresinden projeye ulaşabilirsiniz.
+
  ## Kurulum
  Bilgisayarınızda python3 ve pip kurulu olması gerekmektedir. Kurulu değilse ;
 ```bash
